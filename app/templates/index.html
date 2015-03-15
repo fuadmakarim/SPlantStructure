@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <title>{{ title }} - SPS</title>
+  </head>
+  <body>
+  	<h1>Plant Structure</h1>
+  	{% for row in query %}
+    <p>{{ "Term:%s ----> Definition:%s" % row }}</p>
+    {% endfor %}
+  </body>
+</html>
