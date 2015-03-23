@@ -3,9 +3,25 @@
     <title>{{ title }} - SPS</title>
   </head>
   <body>
-  	<h1>Plant Structure</h1>
+  	<h1>Semantic Plant</h1>
   	{% for row in query %}
     <p>{{ "Term:%s ----> Definition:%s" % row }}</p>
     {% endfor %}
+    <h2>Search term here: <h2>
+    	<form action="{{ url_for('search') }}" method="POST" name="search">
+    		{{ form.hidden_tag() }}
+    		<p>
+    			{{ form.keyword(size=60) }}<br>
+    		</p>
+    		<p>
+    			{{ form.filters }}
+    		</p>
+    		<p><input type="submit" value="Search"></p>
+    		<!-- <select multiple id="filters" name="filters">       
+        		<option value="1">this</option>       
+        		<option value="2">that</option>       
+        		<option value="3">other thing</option>
+			</select> -->
+    	</form>
   </body>
 </html>

@@ -1,9 +1,7 @@
 from rdflib import Graph
 
-g = Graph()
+g = Graph().parse("go.owl")
 # g.parse("http://purl.obolibrary.org/obo/PO_0009011")
-g.parse("http://purl.obolibrary.org/obo/ncbitaxon.owl")
-
 qres = g.query( 
 	""" PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -19,7 +17,7 @@ qres = g.query(
 		  				 }"""
 	)
 for row in qres:
-	print(" %s  " % row)
+	print(" %s " % row)
 
 # import pprint
 # for stmt in g:

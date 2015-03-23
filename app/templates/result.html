@@ -1,0 +1,13 @@
+<html>
+<head>
+	<title>Result</title>
+</head>
+<body>
+	<div>
+		<strong><p>result for {{ keyword }} on {{ filters }} :</p></strong>
+		{% for row in qres %}
+		<p>{{ "%s : %s" %row }}</p>
+		{% endfor %}
+	</div>
+</body>
+</html>
