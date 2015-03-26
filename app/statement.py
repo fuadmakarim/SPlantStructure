@@ -1,6 +1,6 @@
 from rdflib import Graph
 
-g = Graph().parse("go.owl")
+g = Graph().parse("po.owl")
 # g.parse("http://purl.obolibrary.org/obo/PO_0009011")
 qres = g.query( 
 	""" PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

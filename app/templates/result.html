@@ -5,9 +5,23 @@
 <body>
 	<div>
 		<strong><p>result for {{ keyword }} on {{ filters }} :</p></strong>
+		<table>
+			<tr>
+				<td>Term Accession</td>
+				<td>Aspect</td>
+				<td>Term Name</td>
+				<td>Synonym</td>
+				<td>Definition</td>
+				<td>Comment</td>
+			</tr>
 		{% for row in qres %}
-		<p>{{ "%s : %s" %row }}</p>
+			<tr>
+				{% for s in row %}
+					<td>{{ s }}</td>
+				{% endfor %}
+			</tr>
 		{% endfor %}
+		</table>
 	</div>
 </body>
 </html>

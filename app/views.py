@@ -15,7 +15,7 @@ def search():
 	filters = request.form['filters']
 
 	if filters == 'po':
-		poGraph = Graph().parse("ontology.owl")
+		poGraph = Graph().parse("po.owl")
 		qres = poGraph.query( 
 			""" PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 				PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -25,13 +25,20 @@ def search():
 				PREFIX obo: <http://purl.obolibrary.org/obo/>
 				PREFIX po: <http://purl.obolibrary.org/po#>
 
-				SELECT ?label ?comment
+				SELECT ?id ?aspect ?label (group_concat(distinct ?synonym ; separator = ",") AS ?synonyms) ?definition ?comment
 				WHERE
-				{ ?s rdfs:label ?label ; 
+				{ ?s oboInOwl:id ?id ;
+					 oboInOwl:hasOBONamespace ?aspect ;
+					 rdfs:label ?label ; 
+		  		  	 oboInOwl:hasExactSynonym ?synonym ;
+		  		  	 obo:IAO_0000115 ?definition ;
 		  		  	 rdfs:comment ?comment .
 		  		  	 FILTER (REGEX(?label,""" '"'+ request.form['keyword'] +'"' ""","i")
+		  		  	 		|| REGEX(?definition,""" '"'+ request.form['keyword'] +'"' ""","i")
 		  		  			|| REGEX(?comment,""" '"'+ request.form['keyword'] +'"' ""","i"))
-		  		 }"""
+		  		 }
+		  		 GROUP BY ?id
+		  		 ORDER BY ?id"""
 			)
 		# qres = "Test Result"
 	else:
